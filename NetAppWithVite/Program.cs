@@ -6,10 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // [Vite] Add Vite services
-builder.Services.AddViteServices(options =>
-{
-    options.Server.AutoRun = true;
-});
+builder.Services.AddViteServices();
 
 var app = builder.Build();
 
