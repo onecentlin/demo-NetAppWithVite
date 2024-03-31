@@ -25,12 +25,18 @@ export default defineConfig({
         outDir: path.resolve(__dirname, './wwwroot/build'),
         rollupOptions: {
             input: {
-                main: 'Assets/js/main.js'
+                main: 'Assets/js/main.js',
             },
             output: {
-                entryFileNames: '[name].js',
-                chunkFileNames: '[name].js',
-                assetFileNames: '[name].[ext]'
+                assetFileNames: (assetInfo) => {
+                    let extType = assetInfo.name.split('.').at(1)
+                    if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+                        extType = 'img'
+                    }
+                    return `${extType}/[name][extname]`
+                },
+                chunkFileNames: 'js/[name].js',
+                entryFileNames: 'js/[name].js'
             }
         }
     },
